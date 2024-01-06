@@ -2,6 +2,13 @@ import "./Header.scss";
 import { Navbar, Container, Nav, NavDropdown} from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
 const Header = () => {
+  
+  const handleLogin =() => {
+   
+    window.location.href = `${process.env.REACT_APP_BACKEND_SSO}?serviceURL=${process.env.REACT_APP_SERVICE_URL}`;
+}
+
+
   return (
     <>
         <Navbar expand="lg" className="bg-body-tertiary">
@@ -15,7 +22,7 @@ const Header = () => {
             </Nav>
             <Nav>                
                 <NavDropdown title="Settings" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Login</NavDropdown.Item>             
+                <NavDropdown.Item onClick={() => handleLogin()}>Login</NavDropdown.Item>             
                 </NavDropdown>
             </Nav>
             </Navbar.Collapse>
