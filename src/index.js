@@ -8,6 +8,7 @@ import AppRoute from "./routes/AppRoute";
 import About from "./components/About/About";
 import { Provider } from "react-redux";
 import store from './redux/store';
+import Code from "./components/Code/Code";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,8 +17,9 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<AppRoute />} >      
-          <Route path="/About" element={<About />} />
+          <Route path="/about" element={<About />} />
         </Route>
+        <Route path="/code" element={<Code />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>  
