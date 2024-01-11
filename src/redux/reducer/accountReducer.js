@@ -1,4 +1,10 @@
-import { USER_LOGIN_REQUEST, USER_LOGIN_FAILED, USER_LOGIN_SUCCESS } from '../action/accountAction';
+import { USER_LOGIN_REQUEST,
+         USER_LOGIN_FAILED, 
+         USER_LOGIN_SUCCESS,
+         USER_LOGOUT_REQUEST,
+         USER_LOGOUT_FAILED, 
+         USER_LOGOUT_SUCCESS,
+         } from '../action/accountAction';
 
 
 const INITIAL_STATE = {
@@ -27,7 +33,6 @@ const accountReducer = (state = INITIAL_STATE, action) => {
              errorMessage: ''
 
            };
-
         case USER_LOGIN_FAILED:
 
            return {
@@ -45,7 +50,40 @@ const accountReducer = (state = INITIAL_STATE, action) => {
             errorMessage: ''
 
         };
-         default: return state;
+        case USER_LOGOUT_REQUEST:
+
+        return {
+
+          ...state,
+          isLoading : false,
+          errorMessage: ''
+
+        };
+     case USER_LOGOUT_FAILED:
+
+        return {
+           ...state,
+           isLoading : false,
+           errorMessage: action.error
+
+        };
+     case USER_LOGOUT_SUCCESS: 
+        return {
+            ...state,
+            userInfo: {
+                "access_token": "",
+                "refresh_token": "",
+                "email": "",
+                "groupWithRoles": {},
+                "username": ""
+            },
+            isLoading : false,
+            errorMessage: ''
+
+        };
+
+
+        default: return state;
 
     }
 

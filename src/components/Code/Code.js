@@ -12,9 +12,7 @@ const Code = (props) => {
     const dispatch = useDispatch();
     const message = useSelector(state => state.account.errorMessage);
     const user = useSelector(state => state.account.userInfo);
-    if(user && user.access_token) {
-        navigate('/');
-    }
+    
     useEffect(() => {
         const ssoToken = searchParams.get('ssoToken');
         if(ssoToken && firstRunRef.current === false) {
@@ -22,14 +20,18 @@ const Code = (props) => {
             dispatch(doLogin(ssoToken));
         }        
     }, []);
-
+    useEffect(()=> {
+        if(user && user.access_token) {
+            navigate('/');
+        }
+    }, [user]);
 
     return (<>
         <div class= "container">
             <div className="row">
                 <div className="col-12 mt-3">
                 {message}
-                {message && <span>. Please do login again. Click here to &nbsp; <a href={`${process.env.REACT_APP_BACKEND_SSO}?serviceURL=${process.env.REACT_APP_SERVICE_URL}`}>Login</a></span>}
+                {message && <span>. Please do login again. Click here to &nbsp; <a href={`${process.env.REACT_APP_BACKEND_SSO_LOGIN}?serviceURL=${process.env.REACT_APP_SERVICE_URL}`}>Login</a></span>}
                 </div>
             </div>
         </div>
